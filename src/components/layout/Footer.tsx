@@ -82,10 +82,11 @@ export function Footer() {
             <ul className="flex flex-col gap-2.5 text-xs">
               <li>
                 <a
-                  href="#platform"
+                  href="#/space-weather"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('#platform');
+                    window.location.hash = '/space-weather';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   className="text-text-muted hover:text-[#00a8ff] hover:translate-x-1 inline-block transition-all duration-200"
                 >

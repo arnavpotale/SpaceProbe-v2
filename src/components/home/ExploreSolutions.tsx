@@ -105,10 +105,17 @@ export function ExploreSolutions() {
                 <div className="pt-4 border-t border-white/5">
                   <button
                     type="button"
-                    onClick={handleScrollToConnect}
+                    onClick={() => {
+                      if (isFlagship) {
+                        window.location.hash = '/space-weather';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      } else {
+                        handleScrollToConnect();
+                      }
+                    }}
                     className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white hover:text-[#00a8ff] transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#004DC0] rounded"
                   >
-                    <span>{platform.linkText}</span>
+                    <span>{isFlagship ? 'Explore Space Weather Suite' : platform.linkText}</span>
                     <ArrowUpRight
                       size={14}
                       className="opacity-75 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"

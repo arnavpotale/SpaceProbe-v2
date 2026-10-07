@@ -38,6 +38,11 @@ export function DomainCard({
       onClick();
       return;
     }
+    if (domain.id === 'space-weather') {
+      window.location.hash = '/space-weather';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     // Navigate smoothly to platform section
     const el = document.getElementById('platform');
     if (el) {
@@ -158,9 +163,21 @@ export function DomainCard({
               </h3>
 
               {/* Description (Spacious horizontal container, easily readable) */}
-              <p className="text-sm sm:text-base text-white/90 leading-relaxed font-light mb-6">
+              <p className="text-sm sm:text-base text-white/90 leading-relaxed font-light mb-4">
                 {domain.description}
               </p>
+
+              {domain.id === 'space-weather' && (
+                <div className="pt-2">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#00a8ff] group-hover:text-white transition-colors">
+                    <span>Open Space Weather Platform</span>
+                    <ArrowRight
+                      size={14}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </span>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

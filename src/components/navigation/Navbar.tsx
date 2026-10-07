@@ -9,6 +9,10 @@ interface NavItem {
   id: string;
 }
 
+interface NavbarProps {
+  onNavigateSpaceWeather?: () => void;
+}
+
 const NAV_ITEMS: NavItem[] = [
   { label: 'About Us', href: '#about', id: 'about' },
   { label: 'Solutions', href: '#solutions', id: 'solutions' },
@@ -18,7 +22,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Connect', href: '#connect', id: 'connect' },
 ];
 
-export function Navbar() {
+export function Navbar({ onNavigateSpaceWeather }: NavbarProps = {}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -166,8 +170,25 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Right Action: Desktop CTA + Mobile Hamburger */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Right Action: Space Weather Button + Desktop CTA + Mobile Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Space Weather Domain Entry Button */}
+            <a
+              href="#/space-weather"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigateSpaceWeather) {
+                  onNavigateSpaceWeather();
+                } else {
+                  window.location.hash = '/space-weather';
+                }
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-[#00a8ff]/15 hover:bg-[#00a8ff]/25 text-[#00a8ff] hover:text-white border border-[#00a8ff]/40 text-[10px] sm:text-[11px] uppercase tracking-wider font-bold transition-all duration-300 shadow-[0_0_15px_rgba(0,168,255,0.15)] outline-none focus-visible:ring-2 focus-visible:ring-[#00a8ff]"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00a8ff] animate-pulse" />
+              <span>Space Weather</span>
+            </a>
+
             <a
               href="#connect"
               onClick={(e) => {
@@ -234,6 +255,27 @@ export function Navbar() {
 
                 {/* Mobile Links */}
                 <nav className="flex flex-col gap-2 mt-6">
+                  {/* Space Weather Domain Entry Mobile Button */}
+                  <a
+                    href="#/space-weather"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMobileMenuOpen(false);
+                      if (onNavigateSpaceWeather) {
+                        onNavigateSpaceWeather();
+                      } else {
+                        window.location.hash = '/space-weather';
+                      }
+                    }}
+                    className="flex items-center justify-between px-4 py-3 rounded-xl text-small font-bold tracking-wide bg-[#004DC0]/40 text-white border border-[#00a8ff]/40 shadow-lg"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <span className="h-2 w-2 rounded-full bg-[#00a8ff] animate-pulse" />
+                      <span>Space Weather Suite</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-[#00a8ff] uppercase">PORTAL →</span>
+                  </a>
+
                   {NAV_ITEMS.map((item) => {
                     const isActive = activeSection === item.id;
                     return (
